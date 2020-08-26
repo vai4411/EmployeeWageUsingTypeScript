@@ -1,17 +1,29 @@
-let isPresent : number = 1;
-let WAGE_PER_HOUR = 20;
-let FULL_DAY_HOUR = 8;
-let PART_TIME_HOUR = 4;
+let isPresent: number = 1;
+let dailyWage = 0;
+const WAGE_PER_HOUR: number = 20;
+const FULL_DAY_HOUR: number = 8;
+const PART_TIME_HOUR: number = 4;
 
-let empCheck : number = Math.round(Math.random() * 10) % 3;
-if (empCheck == 1) {
-    var dailyWage = WAGE_PER_HOUR * FULL_DAY_HOUR;
-    console.log("Employee daily wage is " + dailyWage);
+for (let i = 0; i < 10; i++) {
+    let empCheck: number = Math.round(Math.random() * 2);
+    console.log(empCheck);
 }
-else if (empCheck == 2) {
-    var dailyWage = WAGE_PER_HOUR * PART_TIME_HOUR;
-    console.log('Part time employee wage is : ' + dailyWage);
+let calculateDailyWage = (empCheck: number): number => {
+    switch (empCheck) {
+        case 1:
+            console.log("Full time employee is present");
+            dailyWage = WAGE_PER_HOUR * FULL_DAY_HOUR;
+            break;
+        case 2:
+            dailyWage = WAGE_PER_HOUR * PART_TIME_HOUR;
+            console.log("Part time employee is present");
+            break;
+        default:
+            console.log("Enployee is absent");
+            break;
+    }
+    return dailyWage;
 }
-else {
-    console.log("Enployee is absent");
-}
+//console.log("Employee daily wage is " + calculateDailyWage(empCheck));
+
+
