@@ -7,6 +7,12 @@ let totalWage = 0;
 let dailyWage = 0;
 let workingHours = 0;
 let totalHours = 0;
+class EmployeeWageDetails {
+    constructor(dailyWage, workingHours) {
+        this.dailyWage = dailyWage;
+        this.workingHours = workingHours;
+    }
+}
 let calculateDailyWage = (empCheck) => {
     switch (empCheck) {
         case 1:
@@ -22,13 +28,16 @@ let calculateDailyWage = (empCheck) => {
             workingHours = 0;
             break;
     }
-    return dailyWage;
+    return new EmployeeWageDetails(dailyWage, workingHours);
 };
 let monthlyWage = () => {
     while (day < 20 && totalHours < 100) {
         let empCheck = Math.round(Math.random() * 2);
-        totalWage += calculateDailyWage(empCheck);
-        totalHours += workingHours;
+        let empDetails = calculateDailyWage(empCheck);
+        totalWage += empDetails.dailyWage;
+        console.log(day + " : " + totalWage);
+        totalHours += empDetails.workingHours;
+        console.log(day + " : " + totalHours);
         day++;
     }
     return totalWage;
