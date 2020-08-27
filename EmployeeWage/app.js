@@ -1,12 +1,16 @@
+// constants
 const WAGE_PER_HOUR = 20;
 const FULL_DAY_HOUR = 8;
 const PART_TIME_HOUR = 4;
 const DAY_PER_MONTH = 20;
+// variables
 let day = 0;
 let totalWage = 0;
 let dailyWage = 0;
 let workingHours = 0;
 let totalHours = 0;
+let dailyWageList = [];
+let dailyWageWithMonthlyWageMap = new Map();
 class EmployeeWageDetails {
     constructor(dailyWage, workingHours) {
         this.dailyWage = dailyWage;
@@ -34,13 +38,15 @@ let monthlyWage = () => {
     while (day < 20 && totalHours < 100) {
         let empCheck = Math.round(Math.random() * 2);
         let empDetails = calculateDailyWage(empCheck);
+        dailyWageList.push(empDetails.dailyWage);
         totalWage += empDetails.dailyWage;
-        console.log(day + " : " + totalWage);
         totalHours += empDetails.workingHours;
-        console.log(day + " : " + totalHours);
         day++;
     }
+    dailyWageWithMonthlyWageMap.set(totalWage, dailyWageList);
     return totalWage;
 };
 console.log("Employee monthly wage is " + monthlyWage());
+console.log("total wage is : " + totalWage +
+    "\ndaily wages : " + dailyWageWithMonthlyWageMap.get(totalWage));
 //# sourceMappingURL=app.js.map
