@@ -10,8 +10,8 @@ let totalWage: number = 0;
 let dailyWage: number = 0;
 let workingHours: number = 0;
 let totalHours: number = 0;
-let dailyWageList: Array<number> = [];
-let dailyWageWithMonthlyWageMap: Map<number, Array<number>> = new Map();
+let dailyWageMap: Map<number, number> = new Map();
+let monthlyWageMap: Map<number, Map<number, number>> = new Map();
 
 class EmployeeWageDetails {
     dailyWage: number;
@@ -45,15 +45,17 @@ let monthlyWage = (): number => {
     while (day < 20 && totalHours < 100) {
         let empCheck: number = Math.round(Math.random() * 2);
         let empDetails = calculateDailyWage(empCheck);
-        dailyWageList.push(empDetails.dailyWage);
+        dailyWageMap.set(day+1,empDetails.dailyWage);
         totalWage += empDetails.dailyWage;
         totalHours += empDetails.workingHours;
         day++;
     }
-    dailyWageWithMonthlyWageMap.set(totalWage, dailyWageList);
+    monthlyWageMap.set(totalWage, dailyWageMap);
     return totalWage;
 }
 
 console.log("Employee monthly wage is " + monthlyWage());
-console.log("total wage is : " + totalWage +
-    "\ndaily wages : " + dailyWageWithMonthlyWageMap.get(totalWage));
+var entries = monthlyWageMap.get(totalWage).entries();
+for (let entry = 0; entry < dailyWageMap.size; entry++) {
+    console.log(entries.next().value);
+}
